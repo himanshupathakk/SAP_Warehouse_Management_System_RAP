@@ -1,0 +1,61 @@
+managed implementation in class ZBP_R_WHMS_PUR unique;
+strict ( 2 );
+with draft;
+extensible;
+
+define behavior for ZR_WHMS_PUR alias ZrWhmsPur
+persistent table ZWHMS_PUR
+extensible
+draft table ZWHMS_PUR_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+{
+
+  field ( readonly )
+    UUID,
+    LocalCreatedBy,
+    LocalCreatedAt,
+    LocalLastChangedBy,
+    LocalLastChangedAt,
+    LastChangedAt;
+
+  field ( numbering : managed )
+    UUID;
+
+  create;
+  update;
+  delete;
+
+  determination generateRequestID on modify { create; }
+
+  determination createStockMovement on save { create; }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+
+  draft determine action Prepare
+  {
+  }
+
+  mapping for ZWHMS_PUR corresponding extensible
+  {
+    UUID               = UUID;
+    RequestID          = REQUEST_ID;
+    ProductID          = PRODUCT_ID;
+    SupplierID         = SUPPLIER_ID;
+    RequestQty         = REQUEST_QTY;
+    RequestDate        = REQUEST_DATE;
+    ApprovedBy         = APPROVED_BY;
+    RequestStatus      = REQUEST_STATUS;
+    Remarks            = REMARKS;
+    LocalCreatedBy     = LOCAL_CREATED_BY;
+    LocalCreatedAt     = LOCAL_CREATED_AT;
+    LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    LastChangedAt      = LAST_CHANGED_AT;
+  }
+
+}

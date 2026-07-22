@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZR_WHMS_STK'
+@MappingRole: true
+define role ZR_WHMS_STK {
+  grant select on ZR_WHMS_STK
+  where TRUE;
+}

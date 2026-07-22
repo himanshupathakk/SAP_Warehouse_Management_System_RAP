@@ -1,0 +1,65 @@
+managed implementation in class ZBP_I_WHMS_PROD01 unique;
+strict ( 2 );
+with draft;
+extensible;
+
+define behavior for ZI_WHMS_PROD01 alias WareHouseManagement
+persistent table ZWHMS_PROD01
+extensible
+draft table ZWHMS_PROD01_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+{
+  field ( readonly )
+    UUID,
+    LocalCreatedBy,
+    LocalCreatedAt,
+    LocalLastChangedBy,
+    LocalLastChangedAt,
+    LastChangedAt;
+
+  field ( numbering : managed )
+    UUID;
+
+  create;
+  update;
+  delete;
+
+  validation validateProduct on save { create; update; }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+
+  draft determine action Prepare
+  {
+    validation validateProduct;
+  }
+
+  mapping for ZWHMS_PROD01 corresponding extensible
+  {
+    UUID               = UUID;
+    ProductID          = PRODUCT_ID;
+    ProductName        = PRODUCT_NAME;
+    ProductType        = PRODUCT_TYPE;
+    CategoryID         = CATEGORY_ID;
+    SupplierID         = SUPPLIER_ID;
+    WarehouseID        = WAREHOUSE_ID;
+    Quantity           = QUANTITY;
+    ReorderLevel       = REORDER_LEVEL;
+    Price              = PRICE;
+    Currency           = CURRENCY;
+    Unit               = UNIT;
+    Barcode            = BARCODE;
+    Status             = STATUS;
+    Description        = DESCRIPTION;
+    LocalCreatedBy     = LOCAL_CREATED_BY;
+    LocalCreatedAt     = LOCAL_CREATED_AT;
+    LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    LastChangedAt      = LAST_CHANGED_AT;
+  }
+
+}

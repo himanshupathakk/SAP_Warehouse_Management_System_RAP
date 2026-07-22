@@ -1,0 +1,11 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "SAP Object Node Type ZWHMS_WH01",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "name": "ZWHMS_WH01",
+  "sapObjectType": "ZWHMS_WH01",
+  "rootNode": true
+}

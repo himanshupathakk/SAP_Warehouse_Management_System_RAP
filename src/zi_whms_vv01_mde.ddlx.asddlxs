@@ -1,0 +1,35 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  presentationVariant: [
+    {
+      qualifier: 'Default',
+      visualizations: [ { type: #AS_CHART, qualifier: 'StockChart' } ]
+    }
+  ],
+
+  chart: [
+    {
+      qualifier: 'StockChart',
+      chartType: #COLUMN,
+      dimensions: [ 'WarehouseID' ],
+      measures: [ 'TotalQuantity' ],
+      measureAttributes: [
+        {
+          measure: 'TotalQuantity',
+          role: #AXIS_1
+        }
+      ]
+    }
+  ]
+}
+
+annotate entity ZI_WHMS_VV01
+with
+{
+  @UI.lineItem: [ { position: 10 } ]
+  WarehouseID;
+
+  @UI.lineItem: [ { position: 20 } ]
+  TotalQuantity;
+}

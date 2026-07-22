@@ -1,0 +1,4 @@
+@EndUserText.label: 'Warehouse Visualization 01'
+define service ZUI_WHMS_VV01 {
+  expose ZI_WHMS_VV01;
+}

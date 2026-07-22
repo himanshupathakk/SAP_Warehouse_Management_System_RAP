@@ -1,0 +1,63 @@
+managed implementation in class ZBP_R_WHMS_STK unique;
+strict ( 2 );
+with draft;
+extensible;
+
+define behavior for ZR_WHMS_STK alias ZrWhmsStk
+persistent table ZWHMS_STK
+draft table ZWHMS_STK_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+extensible
+{
+
+  field ( readonly )
+    UUID,
+    LocalCreatedBy,
+    LocalCreatedAt,
+    LocalLastChangedBy,
+    LocalLastChangedAt,
+    LastChangedAt;
+
+  field ( numbering : managed )
+    UUID;
+
+  create;
+  update;
+  delete;
+
+  validation validateStock on save { create; update; }
+
+  determination generateStockID on modify { create; }
+
+  determination setDefaultRemarks on modify { create; }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+
+  draft determine action Prepare
+  {
+    validation validateStock;
+  }
+
+  mapping for ZWHMS_STK corresponding extensible
+  {
+    UUID               = UUID;
+    StockID            = STOCK_ID;
+    ProductID          = PRODUCT_ID;
+    WarehouseID        = WAREHOUSE_ID;
+    MovementType       = MOVEMENT_TYPE;
+    Quantity           = QUANTITY;
+    TransactionDate    = TRANSACTION_DATE;
+    Remarks            = REMARKS;
+    LocalCreatedBy     = LOCAL_CREATED_BY;
+    LocalCreatedAt     = LOCAL_CREATED_AT;
+    LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    LastChangedAt      = LAST_CHANGED_AT;
+  }
+
+}

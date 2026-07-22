@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZC_WHMS_SUP01'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_WHMS_SUP01'
+  }
+}
+define service ZUI_WHMS_SUP01_SRV provider contracts odata_v4_ui {
+  expose ZC_WHMS_SUP01 as SupplierManagement;
+}

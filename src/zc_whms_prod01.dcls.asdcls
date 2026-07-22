@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZC_WHMS_PROD01'
+@MappingRole: true
+define role ZC_WHMS_PROD01 {
+  grant select on ZC_WHMS_PROD01
+  where INHERITING CONDITIONS FROM ENTITY ZI_WHMS_PROD01 REPLACING { ROOT WITH _BaseEntity };
+}

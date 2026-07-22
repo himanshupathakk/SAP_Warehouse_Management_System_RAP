@@ -1,0 +1,14 @@
+@EndUserText: {
+  label: 'Service Definition for ZC_WHMS_PUR'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_WHMS_PUR'
+  }
+}
+define service ZUI_WHMS_PUR_SRV
+  provider contracts odata_v4_ui {
+  expose ZC_WHMS_PUR;
+  expose ZI_WHMS_PRODUCT_VHE;
+  expose ZI_WHMS_SUPPLIER_VHE;
+}
